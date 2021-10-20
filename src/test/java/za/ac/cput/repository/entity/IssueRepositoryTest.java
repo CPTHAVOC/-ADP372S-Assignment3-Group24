@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class IssueRepositoryTest {
 
-    private static Issue issue = IssueFactory.createIssue("No Elevator to 3rd floor", "Disability",
-            "05/06/21","NA",true, false,true);
+    private static Issue issue = IssueFactory.createIssue("k229","No Elevator to 3rd floor", "Disability",
+            "05/06/21","NA",0, 1,0);
 
-    private static Issue issue_2 = IssueFactory.createIssue("Not enough Lecturers", "Academic",
-            "","",true, false,false);
+    private static Issue issue_2 = IssueFactory.createIssue("k230","Not enough Lecturers", "Academic",
+            "","",0, 0,0);
 
     private static IssueRepository issueRepository = IssueRepository.createIssueRepository();
 
@@ -39,7 +39,7 @@ class IssueRepositoryTest {
 
     @Test
     void c_update() {
-        Issue updatedIssue = IssueFactory.copyFromIssue(issue_2).setIssueDescription("Not Qualified Staff");
+        Issue updatedIssue = new Issue.Builder().copy(issue_2).issueDescription("Not Qualified Staff").build();
         assertNotNull(issueRepository.update(updatedIssue));
     }
 

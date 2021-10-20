@@ -6,9 +6,18 @@
 
 package za.ac.cput.entity;
 
-public class Issue {
-    private String issueId, issueDescription, issueArea, issueRaisedDate, issueResolvedDate;
-    private boolean issueStatus, isResolved, isValidated;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+@Entity
+public class Issue implements Serializable {
+    @Id
+    private String issueId;
+    private String issueDescription, issueArea, issueRaisedDate, issueResolvedDate;
+    private int issueStatus, isResolved, isValidated;
+
+    private Issue(){}
 
     private Issue(Builder builder){
         this.issueId = builder.issueId;
@@ -21,9 +30,55 @@ public class Issue {
         this.isValidated = builder.isValidated;
     }
 
+    public String getIssueId() {
+        return issueId;
+    }
+
+    public String getIssueDescription() {
+        return issueDescription;
+    }
+
+    public String getIssueArea() {
+        return issueArea;
+    }
+
+    public String getIssueRaisedDate() {
+        return issueRaisedDate;
+    }
+
+    public String getIssueResolvedDate() {
+        return issueResolvedDate;
+    }
+
+    public int getIssueStatus() {
+        return issueStatus;
+    }
+
+    public int getIsResolved() {
+        return isResolved;
+    }
+
+    public int getIsValidated() {
+        return isValidated;
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "issueId='" + issueId + '\'' +
+                ", issueDescription='" + issueDescription + '\'' +
+                ", issueArea='" + issueArea + '\'' +
+                ", issueRaisedDate='" + issueRaisedDate + '\'' +
+                ", issueResolvedDate='" + issueResolvedDate + '\'' +
+                ", issueStatus=" + issueStatus +
+                ", isResolved=" + isResolved +
+                ", isValidated=" + isValidated +
+                '}';
+    }
+
     public static class Builder {
         private String issueId, issueDescription, issueArea, issueRaisedDate, issueResolvedDate;
-        private boolean issueStatus, isResolved, isValidated;
+        private int issueStatus, isResolved, isValidated;
 
         public Builder issueId(String issueId){
             this.issueId = issueId;
@@ -50,22 +105,22 @@ public class Issue {
             return this;
         }
 
-        public Builder issueStatus(boolean issueStatus){
+        public Builder issueStatus(int issueStatus){
             this.issueStatus = issueStatus;
             return this;
         }
 
-        public Builder isResolved(boolean isResolved){
+        public Builder isResolved(int isResolved){
             this.isResolved = isResolved;
             return this;
         }
 
-        public Builder isValidated(boolean isValidated){
+        public Builder isValidated(int isValidated){
             this.isValidated = isValidated;
             return this;
         }
 
-        public Issue Copy(Issue issue){
+        public Builder copy(Issue issue){
             this.issueId = issue.issueId;
             this.issueDescription = issue.issueDescription;
             this.issueArea = issue.issueArea;
@@ -74,64 +129,12 @@ public class Issue {
             this.issueStatus = issue.issueStatus;
             this.isResolved = issue.isResolved;
             this.isValidated = issue.isValidated;
+            return this;
+        }
+
+        public Issue build(){
             return new Issue(this);
         }
 
-        public Issue Build(){
-            return new Issue(this);
-        }
-
     }
-
-    public String getIssueId() {
-        return issueId;
-    }
-
-    public String getIssueDescription() {
-        return issueDescription;
-    }
-
-    public String getIssueArea() {
-        return issueArea;
-    }
-
-    public String getIssueRaisedDate() {
-        return issueRaisedDate;
-    }
-
-    public String getIssueResolvedDate() {
-        return issueResolvedDate;
-    }
-
-    public boolean isIssueStatus() {
-        return issueStatus;
-    }
-
-    public boolean isResolved() {
-        return isResolved;
-    }
-
-    public boolean isValidated() {
-        return isValidated;
-    }
-
-    public Issue setIssueDescription(String description){
-        this.issueDescription = description;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Issue{" +
-                "issueId='" + issueId + '\'' +
-                ", issueDescription='" + issueDescription + '\'' +
-                ", issueArea='" + issueArea + '\'' +
-                ", issueRaisedDate='" + issueRaisedDate + '\'' +
-                ", issueResolvedDate='" + issueResolvedDate + '\'' +
-                ", issueStatus=" + issueStatus +
-                ", isResolved=" + isResolved +
-                ", isValidated=" + isValidated +
-                '}';
-    }
-
 }

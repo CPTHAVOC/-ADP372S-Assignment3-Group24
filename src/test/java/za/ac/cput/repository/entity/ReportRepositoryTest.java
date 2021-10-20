@@ -6,7 +6,6 @@ package za.ac.cput.repository.entity;
  Date: 26 July 2021
 */
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.entity.Report;
 import za.ac.cput.factory.ReportFactory;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReportRepositoryTest {
     private static IReportRepository reportRepository = ReportRepository.geReportRepository();
     private static Report report = ReportFactory.createReport("215126505",
-            "Mlungisi Xakekile",
+            "Mlungisi Xakekile","NA",
             "2021/03/16");
 
     @Test
@@ -45,7 +44,7 @@ public class ReportRepositoryTest {
                 .setReportAuth("Mr Xakekile")
                 .setReportDate("26 July 2021")
                 .build();
-        Assert.assertEquals(report.getReportId(), r.getReportId());
+        assertEquals(report.getReportId(), r.getReportId());
         System.out.println("Update: " + r);
     }
 

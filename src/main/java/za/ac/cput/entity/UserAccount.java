@@ -6,12 +6,21 @@ package za.ac.cput.entity;
  * Date: 1st June 2021
  */
 
-public class UserAccount {
-private String userId;
-private String email;
-private String password;
-private boolean loginStatus;
-private String registerDate;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+@Entity
+public class UserAccount implements Serializable {
+
+    @Id
+    private String userId;
+    private String email;
+    private String password;
+    private int loginStatus;
+    private String registerDate;
+
+    private UserAccount(){}
 
     private UserAccount(Builder builder) {
         this.userId = builder.userId;
@@ -32,11 +41,32 @@ private String registerDate;
                 '}';
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getLoginStatus() {
+        return loginStatus;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+
     public static class Builder{
     private String userId;
     private String email;
     private String password;
-    private boolean loginStatus;
+    private int loginStatus;
     private String registerDate;
 
     public Builder setuserId(String userId){
@@ -51,7 +81,7 @@ private String registerDate;
         this.password = password;
         return this;
     }
-    public Builder setloginStatus(boolean loginStatus){
+    public Builder setloginStatus(int loginStatus){
         this.loginStatus = loginStatus;
         return this;
     }
@@ -59,7 +89,10 @@ private String registerDate;
         this.registerDate = registerDate;
         return this;
     }
-    public UserAccount build(){
+
+
+
+        public UserAccount build(){
         return new UserAccount(this);
     }
     private Builder copy(UserAccount userAccount){

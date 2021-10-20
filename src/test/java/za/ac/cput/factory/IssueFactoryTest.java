@@ -19,17 +19,17 @@ class IssueFactoryTest {
     Issue issue, issue2, issue3, issue4;
     @BeforeEach
     void setup(){
-        issue = IssueFactory.createIssue("No Elevator to 3rd floor", "Disability",
-                "05/06/21","NA",true, false,true);
+        issue = IssueFactory.createIssue("k45j","No Elevator to 3rd floor", "Disability",
+                "05/06/21","NA",0, 1,1);
 
-        issue2 = IssueFactory.createIssue("Not enough Lecturers", "Academic",
-                "20/02/21","03/05/21",true, true,true);
+        issue2 = IssueFactory.createIssue("k228","Not enough Lecturers", "Academic",
+                "20/02/21","03/05/21",1, 0,0);
         issue3 = issue;
     }
 
     @Test void testEquality(){
-        issue4 = IssueFactory.copyFromIssue(issue);
-        assertEquals(issue.getIssueId(), issue4.getIssueId());
+        issue4 = new Issue.Builder().copy(issue).build();
+        assertEquals(issue.getIssueArea(), issue4.getIssueArea());
         System.out.println("Objects are equal because issue was copied into issue4");
     }
 
